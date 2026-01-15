@@ -54,7 +54,6 @@
 </head>
 <body class="flex h-screen overflow-hidden">
 
-    <!-- Sidebar Navigation -->
     <aside class="w-64 bg-slate-900 text-slate-300 hidden md:flex flex-col shadow-xl z-20">
         <div class="p-6 border-b border-slate-800 flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-xl">NH</div>
@@ -68,7 +67,6 @@
             <button onclick="renderView('overview')" id="nav-overview" class="nav-item w-full flex items-center gap-3 px-6 py-3 hover:bg-slate-800 hover:text-white transition-colors text-sm font-medium active">
                 <i class="fa-solid fa-chart-line w-5"></i> Resumen General
             </button>
-            <!-- New Projects Section -->
             <button onclick="renderView('projects')" id="nav-projects" class="nav-item w-full flex items-center gap-3 px-6 py-3 hover:bg-slate-800 hover:text-white transition-colors text-sm font-medium">
                 <i class="fa-solid fa-rocket w-5"></i> Proyectos Destacados
             </button>
@@ -95,20 +93,16 @@
         </div>
     </aside>
 
-    <!-- Mobile Header -->
     <div class="md:hidden fixed top-0 w-full bg-slate-900 text-white z-50 p-4 flex justify-between items-center shadow-md">
         <span class="font-bold">Nicolas Hernanz</span>
         <button id="mobile-menu-btn" class="text-slate-300"><i class="fa-solid fa-bars"></i></button>
     </div>
 
-    <!-- Main Content -->
     <main class="flex-1 overflow-y-auto bg-slate-50 p-4 md:p-8 pt-20 md:pt-8 relative">
         <div id="content-area" class="max-w-6xl mx-auto">
-            <!-- Content injected via JS -->
-        </div>
+            </div>
     </main>
 
-    <!-- JavaScript Logic -->
     <script>
         // --- DATA STORE ---
         const profileData = {
@@ -116,7 +110,8 @@
                 title: "Técnico de Sistemas y Seguridad",
                 description: "Profesional de TI en transición hacia Analista SOC. Combino la experiencia operativa de un Administrador de Sistemas (VMWare, M365, Redes) con la mentalidad analítica de seguridad. Especializado en detección proactiva de amenazas, análisis forense de logs y respuesta a incidentes en entornos híbridos.",
                 stats: [
-                    { value: "8+", label: "Incidentes Mayores Resueltos", icon: "fa-fire-extinguisher", color: "text-red-500" },
+                    // ACTUALIZADO: Cambiado de "8+" a "11+" para reflejar el nuevo caso
+                    { value: "11+", label: "Incidentes Mayores Resueltos", icon: "fa-fire-extinguisher", color: "text-red-500" },
                     { value: "300", label: "Usuarios Gestionados", icon: "fa-users", color: "text-blue-500" },
                     { value: "100%", label: "Disponibilidad Remota", icon: "fa-laptop-house", color: "text-green-500" },
                     { value: "ISO", label: "Auditoría 27001", icon: "fa-clipboard-check", color: "text-purple-500" }
@@ -167,7 +162,7 @@
                     details: "Tras la caída de un servicio crítico, descarté problemas de aplicación (Capa 7) y firewall local. Utilizando pruebas de conectividad (ping, curl) identifiqué un error 'Destination Host Unreachable' desde el Proxy Apache hacia el Backend. Diagnostiqué correctamente la caída de una ruta VPN estática entre la DMZ y la red de servidores, permitiendo la restauración del servicio.",
                     tools: ["Linux CLI", "Ping/Curl", "VMWare", "Networking"]
                 },
-				{
+                {
                     id: "pdf-evasion",
                     title: "Phishing Evasivo: Factura CFDI",
                     tag: "Malware Analysis / Evasión",
@@ -194,7 +189,7 @@
                     details: "Alerta de Defender sobre 'Backdoor:PHP/Krebshell'. Inicié protocolo de contención aislando el host. La investigación reveló que no había persistencia en registro ni servidor web activo. El análisis de contexto identificó al usuario como personal de seguridad realizando pruebas. Clasificado como 'True Positive / Benign Intent' y restaurado el servicio.",
                     tools: ["Live Response", "Registry Analysis", "Context"]
                 },
-				{
+                {
                     id: "bf-identity",
                     title: "Compromiso de Identidad (Black Friday)",
                     tag: "Identity / Phishing",
@@ -203,7 +198,7 @@
                     details: "Detección de campaña de Phishing masiva suplantando ofertas de Black Friday dirigida a Ventas. Dos usuarios introdujeron credenciales corporativas. Se detectaron inicios de sesión de riesgo (Impossible Travel) en Entra ID. Se ejecutó respuesta inmediata: Aislamiento de dispositivos vía Intune, revocación de tokens de sesión (Revoke-SPOUserSession), reseteo forzado de contraseñas y análisis forense con Live Response para descartar persistencia (Scheduled Tasks/Run Keys).",
                     tools: ["Entra ID (Azure AD)", "Intune", "Defender Live Response", "KQL"]
                 },
-				{
+                {
                     id: "ps-obfuscated",
                     title: "Ejecución PowerShell Malicioso",
                     tag: "Endpoint / Malware Analysis",
@@ -212,7 +207,7 @@
                     details: "Alerta crítica de EDR: 'Suspicious PowerShell Command Line'. Un usuario ejecutó una supuesta 'Felicitación Navideña.js'. El script lanzó una instancia oculta de PowerShell con comandos codificados en Base64. Realicé la decodificación manual del script, revelando un intento de descarga (DownloadString) desde un dominio C2 externo. El EDR bloqueó la ejecución (AMSI), pero procedí a aislar el host y bloquear el dominio e IP en el Firewall perimetral preventivamente.",
                     tools: ["Defender for Endpoint", "PowerShell Decoding", "AMSI", "Firewalling"]
                 },
-				{
+                {
                     id: "shadow-it-risk",
                     title: "Mitigación Riesgo Crítico (Shadow IT)",
                     tag: "Vuln. Mgmt / Hardening",
@@ -221,7 +216,7 @@
                     details: "Detección proactiva mediante Defender TVM de un dispositivo no gestionado con severidad crítica (+100 vulnerabilidades CVE altas). El activo almacenaba credenciales en caché de una cuenta con privilegios elevados, exponiendo a la organización a técnicas de 'Credential Dumping' y desplazamiento lateral. Se ejecutó un plan de remediación: migración de datos críticos a SharePoint, revocación de credenciales expuestas y decomiso definitivo del hardware, eliminando el riesgo de compromiso del dominio.",
                     tools: ["Defender TVM", "Credential Guard", "Risk Assessment", "Shadow IT Remediation"]
                 },
-				{
+                {
                     id: "ceo-phishing",
                     title: "Investigación Phishing C-Level",
                     tag: "Threat Intel / Social Eng.",
@@ -229,6 +224,16 @@
                     summary: "Descarte de malware en campaña de suplantación dirigida a directivos.",
                     details: "Investigación de Spear Phishing (suplantación de Isaac Guerra). Se analizó el .eml en ANY.RUN revisando IOCs y tráfico HTTP. Se investigó una alerta de Suricata (Microsoft Dr. Watson) determinando que era un Falso Positivo asociado a telemetría legítima y no a tráfico C2. Confirmada la ausencia de payload o ejecución maliciosa en Outlook, se reclasificó como Ingeniería Social pura. Se aplicó bloqueo de remitente y 'Píldora de Advertencia' al usuario.",
                     tools: ["ANY.RUN", "Suricata IDS", "Traffic Analysis", "Email Header Analysis"]
+                },
+                // NUEVO CASO AÑADIDO AQUI
+                {
+                    id: "sharepoint-aitm",
+                    title: "Compromiso SharePoint (AiTM)",
+                    tag: "Cloud Security / IR",
+                    date: "Jan 2026",
+                    summary: "Contención de ataque de Phishing masivo propagado vía SharePoint legítimo.",
+                    details: "Investigación de envío masivo de correos (389 destinatarios) desde cuenta comprometida. El atacante (IP 128.90.161.6) evadió MFA, subió un archivo malicioso (.aspx) y usó la función nativa 'Compartir' para evadir filtros. Realicé análisis forense en Purview para trazar la intrusión, revoqué sesiones, eliminé el artefacto y desplegué bloqueo de IP mediante Acceso Condicional en Entra ID.",
+                    tools: ["Entra ID", "Purview Audit", "SharePoint Admin", "FortiGate"]
                 }
             ],
             skills: {
@@ -262,7 +267,6 @@
 
             return `
                 <div class="animate-fade-in space-y-8">
-                    <!-- Header -->
                     <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full -mr-16 -mt-16 opacity-50 pointer-events-none"></div>
                         <div class="relative z-10">
@@ -279,12 +283,10 @@
                         </div>
                     </div>
 
-                    <!-- Stats Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         ${statsHtml}
                     </div>
 
-                    <!-- Quick Preview of Skills Chart -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                          <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
                             <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2"><i class="fa-solid fa-radar text-blue-500"></i> Radar de Competencias</h3>
@@ -314,7 +316,6 @@
         function renderProjects() {
             const projectsHtml = profileData.projects.map(p => `
                 <div class="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden animate-fade-in">
-                    <!-- Project Header -->
                     <div class="project-gradient p-8 text-white relative">
                         <div class="absolute top-0 right-0 w-40 h-40 bg-white opacity-5 rounded-full -mr-10 -mt-10"></div>
                         <div class="flex justify-between items-start relative z-10">
@@ -332,7 +333,6 @@
                         </div>
                     </div>
                     
-                    <!-- Project Content -->
                     <div class="p-8">
                         <div class="mb-8">
                             <h3 class="text-xl font-bold text-slate-800 mb-3 border-b border-slate-100 pb-2">Descripción del Proyecto</h3>
@@ -413,7 +413,6 @@
                             ${c.tools.map(t => `<span class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded">${t}</span>`).join('')}
                         </div>
                         
-                        <!-- Hidden Details -->
                         <div id="case-${c.id}" class="hidden mt-4 pt-4 border-t border-slate-100 animate-fade-in">
                             <p class="text-slate-700 text-sm leading-relaxed bg-slate-50 p-3 rounded border border-slate-100">
                                 <i class="fa-solid fa-magnifying-glass text-blue-400 mr-2"></i>
@@ -452,7 +451,6 @@
                     <h2 class="text-3xl font-bold text-slate-800 mb-6">Stack Tecnológico</h2>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Security Column -->
                         <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
                             <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                                 <div class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center"><i class="fa-solid fa-shield-halved"></i></div>
@@ -463,7 +461,6 @@
                             </ul>
                         </div>
 
-                        <!-- Systems Column -->
                         <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
                             <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                                 <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center"><i class="fa-solid fa-server"></i></div>
@@ -474,8 +471,7 @@
                             </ul>
                         </div>
 
-                         <!-- Soft Skills Column -->
-                        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
+                         <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
                             <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                                 <div class="w-10 h-10 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center"><i class="fa-solid fa-brain"></i></div>
                                 <h3 class="font-bold text-lg text-slate-800">Competencias</h3>
